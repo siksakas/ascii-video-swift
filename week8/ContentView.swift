@@ -29,27 +29,9 @@ struct ContentView: View {
                 .padding()
         }
         .background(.black)
-        .task {
-            guard let image = UIImage(named: "testImage") else {
-                return
-            }
 
-            ascii = ASCIIRenderer.convert(
-                image: image,
-                width: 128
-            ) ?? ""
-        }
     }
 }
-
-//struct ContentView: View {
-//  @State var model = CameraModel()
-//    @State private var ascii = ""
-//
-//  var body: some View {
-//      Text("what")
-//  }
-//}
 
 #Preview {
     ContentView()

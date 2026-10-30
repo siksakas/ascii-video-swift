@@ -12,12 +12,7 @@ struct ASCIIRenderer {
     //this creates an arr of characters from this string
     static let characters = Array("@%#*+=-:. ")
     
-    static func convert(image: UIImage, width: Int = 128) -> String? {
-        //converting a UIImage to CGImage allows us to access the pixel data of the img
-        guard let cgImage = image.cgImage else {
-            return nil
-        }
-        
+    static func convert(image cgImage: CGImage, width: Int = 128) -> String? {
         // to get the height based off the width, we take the width we put in and multiply it by the original aspect ratio
         //then we halve it by multiplying 0.5 bc ascii characters are taller than they are wide
         let height = Int(Double(width) * Double(cgImage.height)/Double(cgImage.width) * 0.5)
