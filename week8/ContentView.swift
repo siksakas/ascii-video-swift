@@ -15,16 +15,16 @@ struct ContentView: View {
     var body: some View {
         VStack {
             FrameView(image: model.previewImage)
-                .edgesIgnoringSafeArea(.all)
-                .onAppear { model.start() }
                 .frame(height: 300)
+                .clipped()
+                .onAppear { model.start() }
             
             Text(ascii)
                 .font(.system(
                     size: 5,
                     design: .monospaced
                 ))
-                .foregroundStyle(.green)
+                .foregroundStyle(.white)
                 .fixedSize()
                 .padding()
         }
@@ -42,15 +42,12 @@ struct ContentView: View {
     }
 }
 
-//// MARK: - Screen
-//
 //struct ContentView: View {
 //  @State var model = CameraModel()
+//    @State private var ascii = ""
 //
 //  var body: some View {
-//    FrameView(image: model.previewImage)
-//      .edgesIgnoringSafeArea(.all)
-//      .onAppear { model.start() }
+//      Text("what")
 //  }
 //}
 
