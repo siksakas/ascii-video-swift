@@ -10,9 +10,15 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var ascii = ""
+    @State var model = CameraModel()
 
     var body: some View {
-        ScrollView([.horizontal, .vertical]) {
+        VStack {
+            FrameView(image: model.previewImage)
+                .edgesIgnoringSafeArea(.all)
+                .onAppear { model.start() }
+                .frame(height: 300)
+            
             Text(ascii)
                 .font(.system(
                     size: 5,
@@ -35,6 +41,18 @@ struct ContentView: View {
         }
     }
 }
+
+//// MARK: - Screen
+//
+//struct ContentView: View {
+//  @State var model = CameraModel()
+//
+//  var body: some View {
+//    FrameView(image: model.previewImage)
+//      .edgesIgnoringSafeArea(.all)
+//      .onAppear { model.start() }
+//  }
+//}
 
 #Preview {
     ContentView()
