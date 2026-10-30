@@ -14,6 +14,7 @@ import CoreImage
 @Observable
 class CameraModel: NSObject {
   var previewImage: CGImage?
+  var asciiFrame = ""
 
   @ObservationIgnored private let session = AVCaptureSession()
   @ObservationIgnored private let context = CIContext(options: nil)
@@ -79,8 +80,13 @@ extension CameraModel: AVCaptureVideoDataOutputSampleBufferDelegate {
     guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
     let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
     guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else { return }
+
+    // convert here on videoQueue so the main thread only receives the finished string
+    let ascii = ASCIIRenderer.convert(image: cgImage, width: 128)
+
     DispatchQueue.main.async {
       self.previewImage = cgImage
+      if let ascii { self.asciiFrame = ascii }
     }
   }
 }

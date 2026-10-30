@@ -9,17 +9,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var ascii = ""
+//    @State private var ascii = ""
     @State var model = CameraModel()
 
     var body: some View {
         VStack {
-            FrameView(image: model.previewImage)
-                .frame(height: 300)
-                .clipped()
-                .onAppear { model.start() }
-            
-            Text(ascii)
+            Text(model.asciiFrame)
                 .font(.system(
                     size: 5,
                     design: .monospaced
